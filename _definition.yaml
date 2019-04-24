@@ -17,7 +17,7 @@ ImpersonateOAuth: hide
 Interface: hide
 Custom1: optional
 Custom1Label: Proxy Host
-Custom1Hint: ''
+Custom1Hint: 'Hostname or IP address'
 Custom2: optional
 Custom2Label: Proxy Authentication
 Custom3: optional
