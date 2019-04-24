@@ -1,0 +1,27 @@
+ConnectorTitle: NodeJs RSS Connector
+AccessCodeServiceEndpoint: 
+AccessTokenServiceEndpoint: 
+ApiEndPoint:
+UserName: hide
+UserPassword: hide
+ClientId: hide
+ClientSecret: hide
+AccessCodeServiceUrl: hide
+AccessTokenServiceUrl: hide
+Personalized: !!bool true
+ApiKey: hide
+ServiceUrl: required
+ServiceUrlHint: 'RSS URL'
+XML2JSON: hide
+ImpersonateOAuth: hide
+Interface: hide
+Custom1: optional
+Custom1Label: Proxy Host
+Custom1Hint: ''
+Custom2: optional
+Custom2Label: Proxy Authentication
+Custom3: optional
+Custom2Hint: 'username:password'
+Custom3Label: Proxy Port
+Custom3Hint: ''
+Scopes:

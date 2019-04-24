@@ -1,0 +1,13 @@
+{
+  "name": "rss-proxy-connector",
+  "version": "0.1.0",
+  "description": "",
+  "main": "feed.js",
+  "dependencies": {
+    "agentkeepalive": "^4.0.2",
+    "got": "^9.6.0",
+    "rss-parser": "^3.4.3",
+    "tunnel": "0.0.6"
+  },
+  "devDependencies": {}
+}
