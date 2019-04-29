@@ -15,12 +15,12 @@ ServiceUrlHint: 'RSS URL'
 XML2JSON: hide
 ImpersonateOAuth: hide
 Interface: hide
-Custom1: optional
+Custom1: hide
 Custom1Label: Proxy Host
 Custom1Hint: 'Hostname or IP address'
-Custom2: optional
+Custom2: hide
 Custom2Label: Proxy Authentication
-Custom3: optional
+Custom3: hide
 Custom2Hint: 'username:password'
 Custom3Label: Proxy Port
 Custom3Hint: ''

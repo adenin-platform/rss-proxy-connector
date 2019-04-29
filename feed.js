@@ -1,11 +1,8 @@
 'use strict';
 
-const got = require('got');
-const HttpAgent = require('agentkeepalive');
-const tunnel = require('tunnel');
 const Parser = require('rss-parser');
+const api = require('./api');
 
-const HttpsAgent = HttpAgent.HttpsAgent;
 const parser = new Parser();
 
 let startDate = null;
@@ -17,17 +14,20 @@ let pageSize = null;
 
 module.exports = async function (activity) {
   try {
-    const response = await got(activity.Context.connector.endpoint, configureOpts());
-    const json = await parser.parseString(response.body);
+    api.initialize(activity);
+
+    const response = await api('/');
+
+    const parsed = await parser.parseString(response.body);
 
     const items = [];
 
     configureRange();
 
-    for (let i = 0; i < json.items.length; i++) {
-      const item = convertItem(json.items[i]);
+    for (let i = 0; i < parsed.items.length; i++) {
+      const item = convertItem(parsed.items[i]);
 
-      if (!skip(i, json.items.length, new Date(item.date))) items.push(item);
+      if (!skip(i, parsed.items.length, new Date(item.date))) items.push(item);
     }
 
     activity.Response.Data._startDate = startDate;
@@ -47,33 +47,6 @@ module.exports = async function (activity) {
     activity.Response.Data = {
       ErrorText: m
     };
-  }
-
-  function configureOpts() {
-    if (activity.Context.connector.custom1) {
-      const proxy = {
-        host: activity.Context.connector.custom1
-      };
-
-      if (activity.Context.connector.custom2) {
-        proxy.proxyAuth = activity.Context.connector.custom2;
-
-        if (activity.Context.connector.custom3) proxy.port = parseInt(activity.Context.connector.custom3, 10);
-
-        return {
-          agent: tunnel.httpsOverHttp({
-            proxy: proxy
-          })
-        };
-      } else {
-        return {
-          agent: {
-            http: new HttpAgent(),
-            https: new HttpsAgent()
-          }
-        };
-      }
-    }
   }
 
   function configureRange() {
