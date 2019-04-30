@@ -55,24 +55,21 @@ module.exports = async function (activity) {
         host: activity.Context.connector.custom1
       };
 
-      if (activity.Context.connector.custom2) {
-        proxy.proxyAuth = activity.Context.connector.custom2;
+      if (activity.Context.connector.custom2) proxy.proxyAuth = activity.Context.connector.custom2;
+      if (activity.Context.connector.custom3) proxy.port = parseInt(activity.Context.connector.custom3, 10);
 
-        if (activity.Context.connector.custom3) proxy.port = parseInt(activity.Context.connector.custom3, 10);
-
-        return {
-          agent: tunnel.httpsOverHttp({
-            proxy: proxy
-          })
-        };
-      } else {
-        return {
-          agent: {
-            http: new HttpAgent(),
-            https: new HttpsAgent()
-          }
-        };
-      }
+      return {
+        agent: tunnel.httpsOverHttp({
+          proxy: proxy
+        })
+      };
+    } else {
+      return {
+        agent: {
+          http: new HttpAgent(),
+          https: new HttpsAgent()
+        }
+      };
     }
   }
 
