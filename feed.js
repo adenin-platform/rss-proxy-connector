@@ -16,10 +16,8 @@ module.exports = async function (activity) {
   try {
     api.initialize(activity);
 
-    const response = await api('/');
-
+    const response = await api('');
     const parsed = await parser.parseString(response.body);
-
     const items = [];
 
     configureRange();
@@ -48,6 +46,9 @@ module.exports = async function (activity) {
       ErrorText: m
     };
   }
+
+  // workaround circular json error in v1
+  activity.Context.ProxyServer = undefined;
 
   function configureRange() {
     if (activity.Request.Query.startDate) startDate = convertDate(activity.Request.Query.startDate);
